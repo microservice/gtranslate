@@ -1,2 +1,3 @@
-# gtranslate
-An OMG service to translate content using Google's Translation API
+# _Google Translate_ Open Microservice
+
+An OMS service to translate content using Google's Translation API

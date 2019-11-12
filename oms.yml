@@ -1,0 +1,51 @@
+oms: 1
+
+info:
+  version: 1.0.0
+  title: Google Translate
+  description: Translate text between languages.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+lifecycle:
+  startup:
+    command: ["node", "/app/src/index.js"]
+
+health:
+  http:
+    path: /health
+    port: 8080
+
+actions:
+  translate:
+    http:
+      path: /
+      method: post
+      port: 8080
+    arguments:
+      text:
+        help: The text to translate.
+        type: string
+        required: true
+        default: hello
+        in: requestBody
+      target:
+        help: The language to translate into.
+        type: string
+        required: true
+        default: es
+        in: requestBody
+    output:
+      contentType: application/json
+      type: map
+
+environment:
+  PROJECT_ID:
+    required: true
+    type: string
+    help: A Google Cloud "Project ID"
+  GOOGLE_APPLICATION_CREDENTIALS:
+    required: true
+    type: string
+    help: Base64 encoded contents of a Google Cloud Credentials JSON
