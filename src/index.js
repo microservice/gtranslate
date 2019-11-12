@@ -19,16 +19,28 @@ process.env.GOOGLE_APPLICATION_CREDENTIALS = '/tmp/credentials.json'
 // Instantiates a client
 const translate = new Translate({ projectId: PROJECT_ID })
 
-app.post('/', async (req, res) => {
+app.post('/translate', async (req, res) => {
   const { text = 'hello', target = 'es' } = req.body
 
-  // Translates some `text` into the `target` language
   translate
     .translate(text, target)
     .then(data => {
       const translation = data[0]
-
       res.json({ translation })
+    })
+    .catch(er => {
+      res.status(500).json({ message: er.message })
+    })
+})
+
+app.post('/detect', async (req, res) => {
+  const { text = 'hello' } = req.body
+
+  translate
+    .detect(text)
+    .then(data => {
+      const { language } = data[0]
+      res.json({ language })
     })
     .catch(er => {
       res.status(500).json({ message: er.message })

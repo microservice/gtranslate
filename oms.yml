@@ -18,10 +18,26 @@ health:
     port: 8080
 
 actions:
+  detect:
+    help: Detect language of a text context.
+    http:
+      path: /detect
+      method: post
+      port: 8080
+    arguments:
+      text:
+        help: The text to examine.
+        type: string
+        required: true
+        default: hello
+        in: requestBody
+    output:
+      contentType: application/json
+      type: map
   translate:
     help: Translate text context to a different language.
     http:
-      path: /
+      path: /translate
       method: post
       port: 8080
     arguments:
