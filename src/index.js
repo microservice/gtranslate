@@ -23,9 +23,16 @@ app.post('/', async (req, res) => {
   const { text = 'hello', target = 'es' } = req.body
 
   // Translates some `text` into the `target` language
-  const [translation] = await translate.translate(text, target)
+  translate
+    .translate(text, target)
+    .then(data => {
+      const translation = data[0]
 
-  res.json({ translation })
+      res.json({ translation })
+    })
+    .catch(er => {
+      res.status(500).json({ message: er.message })
+    })
 })
 
 app.get('/health', (req, res) => res.send('OK'))
