@@ -19,6 +19,7 @@ health:
 
 actions:
   translate:
+    help: Translate text context to a different language.
     http:
       path: /
       method: post
