@@ -1,22 +1,24 @@
 oms: 1
-
 info:
   version: 1.0.0
   title: Google Translate
   description: Translate text between languages.
   license:
     name: MIT
-    url: https://opensource.org/licenses/MIT
-
+    url: 'https://opensource.org/licenses/MIT'
+  contact:
+    name: Open Microservices
+    url: 'https://openmicroservices.org'
+    email: core@openmicroservices.org
 lifecycle:
   startup:
-    command: ["node", "/app/src/index.js"]
-
+    command:
+      - node
+      - /app/src/index.js
 health:
   http:
     path: /health
     port: 8080
-
 actions:
   detect:
     help: Detect language of a text context.
@@ -89,7 +91,7 @@ actions:
           - ms
           - ml
           - mr
-          - no
+          - 'no'
           - pl
           - pt-PT
           - ro
@@ -113,7 +115,6 @@ actions:
     output:
       contentType: application/json
       type: map
-
 environment:
   PROJECT_ID:
     required: true
